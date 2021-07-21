@@ -5,17 +5,17 @@ import { AppLoading } from 'expo'
 
 import styles from './styles'
 
-const LIST_QUERY = gql`
-  query Lists {
-    getLists {
+const POSTS_QUERY = gql`
+  query Posts {
+    getPosts {
       id
       title
     }
   }
 `
 
-const ListItem = ({ list, onPress }) => {
-  const { title } = list
+const ListItem = ({ post, onPress }) => {
+  const { title } = post;
 
   return (
     <Pressable style={styles.item} onPress={onPress}>
@@ -25,7 +25,7 @@ const ListItem = ({ list, onPress }) => {
 }
 
 export default ({ navigation }) => {
-  const { data, loading } = useQuery(LIST_QUERY)
+  const { data, loading } = useQuery(POSTS_QUERY)
 
   if (loading) {
     return <AppLoading />
@@ -33,14 +33,14 @@ export default ({ navigation }) => {
 
   return (
     <FlatList
-      data={data?.getLists || []}
+      data={data?.getPosts || []}
       renderItem={({ item }) => (
         <ListItem
           list={item}
-          onPress={() => navigation.navigate('List', { list: item })}
+          onPress={() => navigation.navigate('Post', { post: item })}
         />
       )}
-      keyExtractor={(list) => list.id.toString()}
+      keyExtractor={(post) => post.id.toString()}
     />
   )
 }
