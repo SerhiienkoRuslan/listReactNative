@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { gql, useMutation } from '@apollo/client';
 
 import routesName from 'constants/routesName';
+import authHelpers from 'helpers/auth.helpers';
 
 const REGISTRATION = gql`
   mutation registerMutation($email: String!, $password: String!, $username: String) {
@@ -13,7 +14,7 @@ const REGISTRATION = gql`
 `;
 
 const RegistrationScreen = ({ navigation }) => {
-  const [submitRegistration, { data }] = useMutation(REGISTRATION);
+  const [submitRegistration] = useMutation(REGISTRATION);
   const [authData, setAuthData] = useState({
     email: null,
     username: null,
@@ -21,7 +22,15 @@ const RegistrationScreen = ({ navigation }) => {
     passwordRepeat: null
   });
 
-  const onRegister = () => submitRegistration({ variables: { ...authData } });
+  const onRegister = () => {
+    submitRegistration({ variables: { ...authData } })
+      .then(resp => {
+        if (resp?.data?.registerUser?.token) {
+          authHelpers.saveToken(resp.data.registerUser.token);
+          navigation.navigate(routesName.HOME_SCREEN);
+        }
+      });
+  };
 
   return (
     <View style={styles.container}>

@@ -3,6 +3,11 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
+      ["module:react-native-dotenv", {
+        "moduleName": "@env",
+        "path": ".env"
+      }],
+      "transform-inline-environment-variables",
       [
         'module-resolver',
         {
@@ -12,7 +17,8 @@ module.exports = function (api) {
             screens: './src/screens',
             styles: './src/styles',
             constants: './src/constants',
-            navigation: './src/navigation'
+            navigation: './src/navigation',
+            helpers: './src/helpers'
           }
         }
       ]

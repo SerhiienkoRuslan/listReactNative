@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
-import { Alert, Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { gql, useMutation } from '@apollo/client';
 
 import routesName from 'constants/routesName';
+import authHelpers from 'helpers/auth.helpers';
+
+const LOGIN = gql`
+    mutation loginMutation($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+            token
+        }
+    }
+`;
 
 const LoginScreen = ({ navigation }) => {
+  const [submitLogin] = useMutation(LOGIN);
   const [authData, setAuthData] = useState({
-    username: null,
+    email: null,
     password: null
   });
 
-  const onLogin = () => Alert.alert('Credentials', `${authData.username || ''}`);
+  const onLogin = () => {
+    submitLogin({ variables: { ...authData } })
+      .then(resp => {
+        if (resp?.data?.login?.token) {
+          authHelpers.saveToken(resp.data.login.token);
+          navigation.navigate(routesName.HOME_SCREEN);
+        }
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -20,7 +39,7 @@ const LoginScreen = ({ navigation }) => {
           style={styles.inputText}
           placeholder="Email"
           placeholderTextColor="#ffffff"
-          onChangeText={(username) => setAuthData(prev => ({ ...prev, username }))}
+          onChangeText={(email) => setAuthData(prev => ({ ...prev, email }))}
         />
       </View>
 
