@@ -12,7 +12,7 @@ import { AuthStackNavigator } from "navigation/StackNavigator";
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://localhost:5000/graphql',
   // uri: 'https://api.graphql.guide/graphql',
   cache,
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },

@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Alert, TextInput, TouchableOpacity } from 'react-native';
+import { gql, useMutation } from '@apollo/client';
 
 import routesName from 'constants/routesName';
 
+const REGISTRATION = gql`
+  mutation registerMutation($email: String!, $password: String!, $username: String) {
+    registerUser(email: $email, password: $password, username: $username) {
+      token
+    }
+  }
+`;
+
 const RegistrationScreen = ({ navigation }) => {
+  const [submitRegistration, { data }] = useMutation(REGISTRATION);
   const [authData, setAuthData] = useState({
+    email: null,
     username: null,
     password: null,
     passwordRepeat: null
   });
 
-  const onRegister = () => Alert.alert('Credentials', `${authData.username || ''}`);
+  const onRegister = () => submitRegistration({ variables: { ...authData } });
 
   return (
     <View style={styles.container}>
@@ -19,9 +30,18 @@ const RegistrationScreen = ({ navigation }) => {
       <View style={styles.inputView} >
         <TextInput
           style={styles.inputText}
-          placeholder="Email"
+          placeholder="User Name"
           placeholderTextColor="#ffffff"
           onChangeText={(username) => setAuthData(prev => ({ ...prev, username }))}
+        />
+      </View>
+
+      <View style={styles.inputView} >
+        <TextInput
+          style={styles.inputText}
+          placeholder="Email"
+          placeholderTextColor="#ffffff"
+          onChangeText={(email) => setAuthData(prev => ({ ...prev, email }))}
         />
       </View>
 
