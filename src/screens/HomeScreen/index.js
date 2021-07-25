@@ -1,9 +1,9 @@
-import React from 'react';
-import { Text, FlatList, Pressable } from 'react-native';
-import { gql, useQuery } from '@apollo/client';
-import { AppLoading } from 'expo';
+import React from 'react'
+import { Text, FlatList, Pressable } from 'react-native'
+import { gql, useQuery } from '@apollo/client'
+import { AppLoading } from 'expo'
 
-import styles from './styles';
+import styles from './styles'
 
 const POSTS_QUERY = gql`
   query Posts {
@@ -12,7 +12,7 @@ const POSTS_QUERY = gql`
       title
     }
   }
-`;
+`
 
 const ListItem = ({ post, onPress }) => {
   const { title } = post;
@@ -25,7 +25,7 @@ const ListItem = ({ post, onPress }) => {
 }
 
 export default ({ navigation }) => {
-  const { data, loading } = useQuery(POSTS_QUERY);
+  const { data, loading } = useQuery(POSTS_QUERY)
 
   if (loading) {
     return <AppLoading />
