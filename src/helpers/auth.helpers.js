@@ -12,7 +12,7 @@ const saveToken = async (token) => {
   } else {
     await SecureStore.setItemAsync(authTokenName, token)
   }
-}
+};
 
 const getToken = async () => {
   let tokenVal;
@@ -22,7 +22,7 @@ const getToken = async () => {
     tokenVal = await SecureStore.getItemAsync(authTokenName)
   }
   return tokenVal;
-}
+};
 
 const deleteToken = async () => {
   if (isWeb) {
@@ -30,6 +30,6 @@ const deleteToken = async () => {
   } else {
     await SecureStore.deleteItemAsync(authTokenName)
   }
-}
+};
 
 export default { saveToken, getToken, deleteToken };

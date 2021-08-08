@@ -18,6 +18,8 @@
     "apollo-link-context": "^1.0.20",
     "apollo3-cache-persist": "^0.6.0",
     "expo": "~39.0.2",
+    "expo-app-loading": "^1.1.2",
+    "expo-asset": "~8.2.0",
     "expo-secure-store": "~9.2.0",
     "expo-status-bar": "~1.0.2",
     "graphql": "^15.3.0",
@@ -35,5 +37,8 @@
     "@babel/core": "~7.9.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3"
   },
-  "private": true
+  "private": true,
+  "engines": {
+    "node": "12.18.4"
+  }
 }

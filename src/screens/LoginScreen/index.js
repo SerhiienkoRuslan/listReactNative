@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { gql, useMutation } from '@apollo/client';
+import { gql, useMutation, useApolloClient } from '@apollo/client';
 
 import routesName from 'constants/routesName';
 import authHelpers from 'helpers/auth.helpers';
+import graphqlVar from 'graphqlVar';
 
 const LOGIN = gql`
-    mutation loginMutation($email: String!, $password: String!) {
-        login(email: $email, password: $password) {
-            token
-        }
+  mutation loginMutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
     }
+  }
 `;
 
 const LoginScreen = ({ navigation }) => {
   const [submitLogin] = useMutation(LOGIN);
+  const client = useApolloClient();
   const [authData, setAuthData] = useState({
     email: null,
     password: null
@@ -25,7 +27,12 @@ const LoginScreen = ({ navigation }) => {
       .then(resp => {
         if (resp?.data?.login?.token) {
           authHelpers.saveToken(resp.data.login.token);
-          navigation.navigate(routesName.HOME_SCREEN);
+          client.cache.writeQuery({
+            query: graphqlVar.IS_LOGGED_IN,
+            data: {
+              isLoggedIn: true
+            }
+          });
         }
       });
   };
