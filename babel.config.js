@@ -18,7 +18,8 @@ module.exports = function (api) {
             styles: './src/styles',
             constants: './src/constants',
             navigation: './src/navigation',
-            helpers: './src/helpers'
+            helpers: './src/helpers',
+            graphqlVar: './src/graphqlVar'
           }
         }
       ]
