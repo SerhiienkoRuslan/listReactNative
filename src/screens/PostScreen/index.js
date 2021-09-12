@@ -17,7 +17,9 @@ const POST_QUERY = gql`
 const PostScreen = ({ route }) => {
   const { data, loading } = useQuery(POST_QUERY, {
     variables: { id: route?.params?.post?.id },
-  })
+  });
+
+  const { getPost } = data;
 
   if (loading) {
     return <Loading />
@@ -25,7 +27,7 @@ const PostScreen = ({ route }) => {
 
   return (
     <View>
-      <Text>{data.content || ''}</Text>
+      <Text>{getPost?.content || ''}</Text>
     </View>
   )
 }

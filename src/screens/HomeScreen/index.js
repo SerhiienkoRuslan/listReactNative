@@ -36,7 +36,7 @@ export default ({ navigation }) => {
       data={data?.getPosts || []}
       renderItem={({ item }) => (
         <ListItem
-          list={item}
+          post={item}
           onPress={() => navigation.navigate('Post', { post: item })}
         />
       )}

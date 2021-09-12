@@ -1,5 +1,4 @@
 import React from "react";
-import { TouchableOpacity, Text } from 'react-native';
 import { DrawerActions } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
 import { gql, useApolloClient, useQuery } from '@apollo/client';
@@ -22,13 +21,11 @@ const ME_QUERY = gql`
 `
 
 const DrawerNavigator = () => {
-  const { data } = useQuery(ME_QUERY);
+  const { error } = useQuery(ME_QUERY);
   const client = useApolloClient();
-  // console.log(data)
 
-  if (!data) {
-    // TODO: ERROR REDIRECT
-    // authHelpers.deleteToken();
+  if (error) {
+    authHelpers.deleteToken();
   }
 
   const CustomDrawerContent = (props) => {
