@@ -7,6 +7,7 @@ module.exports = function (api) {
         "moduleName": "@env",
         "path": ".env"
       }],
+      "@babel/plugin-proposal-optional-chaining",
       "transform-inline-environment-variables",
       [
         'module-resolver',

@@ -5,8 +5,6 @@ import { gql, useMutation } from '@apollo/client';
 import Input from 'components/Input';
 import CustomButton from 'components/CustomButton';
 
-import routesName from 'constants/routesName';
-
 const POST = gql`
   mutation Mutation($title: String!, $content: String!) {
     createPost(post: { title: $title, content: $content }) {

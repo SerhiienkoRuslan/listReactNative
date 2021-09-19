@@ -19,6 +19,10 @@ import RegistrationScreen from 'screens/RegistrationScreen';
 // Profile pages
 import ProfileScreen from 'screens/ProfileScreen';
 
+// Message pages
+import MessageListScreen from 'screens/MessageListScreen';
+import MessageScreen from 'screens/MessageScreen';
+
 const Stack = createStackNavigator();
 
 import { screenOptions } from 'styles';
@@ -92,6 +96,33 @@ const CreatePostStackNavigator = () => {
   );
 }
 
+const MessageStackNavigator = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={routesName.CREATE_POST_SCREEN}
+      screenOptions={screenOptions}
+    >
+      <Stack.Screen
+        name={routesName.MESSAGE_SCREEN}
+        component={MessageListScreen}
+        options={{
+          title: 'Messages',
+          headerLeft: () => navBtn(navigation)
+        }}
+      />
+
+      <Stack.Screen
+        name={routesName.CHAT_SCREEN}
+        component={MessageScreen}
+        options={({ route: { params: { message: { title } } } }) => ({
+          title: title,
+          gestureResponseDistance: { horizontal: 500 }
+        })}
+      />
+    </Stack.Navigator>
+  )
+}
+
 const AuthStackNavigator = () => {
   return (
     <Stack.Navigator
@@ -113,4 +144,4 @@ const AuthStackNavigator = () => {
   );
 }
 
-export { MainStackNavigator, ProfileStackNavigator, AuthStackNavigator, CreatePostStackNavigator };
+export { MainStackNavigator, ProfileStackNavigator, AuthStackNavigator, CreatePostStackNavigator, MessageStackNavigator };

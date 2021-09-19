@@ -1,7 +1,7 @@
 import React from "react";
 import { DrawerActions } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
-import { gql, useApolloClient, useQuery } from '@apollo/client';
+import { useApolloClient, useQuery } from '@apollo/client';
 
 import authHelpers from 'helpers/auth.helpers';
 import graphqlVar from 'graphqlVar';
@@ -12,16 +12,8 @@ import TabNavigator from "./TabNavigator";
 
 const Drawer = createDrawerNavigator();
 
-const ME_QUERY = gql`
-  query ME_QUERY {
-    me {
-      id, username
-    }
-  }
-`
-
 const DrawerNavigator = () => {
-  const { error } = useQuery(ME_QUERY);
+  const { error } = useQuery(graphqlVar.ME_QUERY);
   const client = useApolloClient();
 
   if (error) {

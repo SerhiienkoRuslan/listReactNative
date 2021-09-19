@@ -19,15 +19,13 @@ const PostScreen = ({ route }) => {
     variables: { id: route?.params?.post?.id },
   });
 
-  const { getPost } = data;
-
   if (loading) {
     return <Loading />
   }
 
   return (
     <View>
-      <Text>{getPost?.content || ''}</Text>
+      <Text>{data?.getPost?.content || ''}</Text>
     </View>
   )
 }

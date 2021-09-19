@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { gql, useMutation, useApolloClient } from '@apollo/client';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Input from 'components/Input';
 
+import graphqlVar from 'graphqlVar';
+
 const PROFILE_UPDATE = gql`
-  mutation profileMutation($email: String!, $username: String) {
-    updateProfile(email: $email, username: $username) {
+  mutation profileMutation($id: Int!, $email: String, $username: String) {
+    updateProfile(id: $id, email: $email, username: $username) {
         email, username
     }
   }
@@ -20,13 +22,12 @@ const defaultProfile = {
 const ProfileScreen = () => {
   const client = useApolloClient();
   const [submitProfile] = useMutation(PROFILE_UPDATE);
-  const [profileData, setProfile] = useState(defaultProfile);
+  const profileDataCache = client.readQuery({ query: graphqlVar.ME_QUERY });
+  const [profileData, setProfile] = useState(profileDataCache?.me || defaultProfile);
 
-  console.log(client.cache)
-
-  const onRegister = async () => {
-    await submitProfile({ variables: { ...profileData, id: 5 } })
-      .then(resp => console.log(resp));
+  const onUpdateProfile = async () => {
+    await submitProfile({ variables: { ...profileData } })
+      .then(({ data }) => setProfile(prev => ({ ...prev, ...data?.updateProfile })));
   };
 
   return (
@@ -34,16 +35,18 @@ const ProfileScreen = () => {
       <Text>Profile</Text>
 
       <Input
+        value={profileData?.username || ''}
         placeholder="User Name"
         onChangeText={(username) => setProfile(prev => ({ ...prev, username }))}
       />
 
       <Input
+        value={profileData?.email || ''}
         placeholder="Email"
         onChangeText={(email) => setProfile(prev => ({ ...prev, email }))}
       />
 
-      <TouchableOpacity style={styles.submitBtn} onPress={onRegister}>
+      <TouchableOpacity style={styles.submitBtn} onPress={onUpdateProfile}>
         <Text style={styles.submitBtnText}>Submit</Text>
       </TouchableOpacity>
     </View>

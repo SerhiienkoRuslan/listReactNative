@@ -26,14 +26,10 @@ const styles = StyleSheet.create({
     height: uiElementSize.HEIGHT,
     marginBottom: 20,
     justifyContent: "center",
-    padding: 20,
-    outline: "none",
-    boxShadow: "none"
+    padding: 20
   },
   inputText:{
-    color: "white",
-    outline: "none",
-    boxShadow: "none"
+    color: "white"
   }
 });
 

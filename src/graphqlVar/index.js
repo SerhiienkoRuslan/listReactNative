@@ -6,4 +6,12 @@ const IS_LOGGED_IN = gql`
   }
 `;
 
-export default { IS_LOGGED_IN };
+const ME_QUERY = gql`
+  query ME_QUERY {
+    me {
+      id, username, email
+    }
+  }
+`;
+
+export default { IS_LOGGED_IN, ME_QUERY };
