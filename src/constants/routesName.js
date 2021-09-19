@@ -4,5 +4,7 @@ export default {
   CREATE_POST_SCREEN: 'Create Post',
   PROFILE_SCREEN: 'Profile',
   REGISTRATION_SCREEN: 'Registration',
-  LOGIN_SCREEN: 'Login'
+  LOGIN_SCREEN: 'Login',
+  MESSAGE_SCREEN: 'Message',
+  CHAT_SCREEN: 'Chat'
 };

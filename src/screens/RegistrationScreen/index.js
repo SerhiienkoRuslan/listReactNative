@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { gql, useApolloClient, useMutation } from '@apollo/client';
+
+import Input from 'components/Input';
 
 import routesName from 'constants/routesName';
 import authHelpers from 'helpers/auth.helpers';
@@ -43,43 +45,27 @@ const RegistrationScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.logo}>SoWhat?</Text>
 
-      <View style={styles.inputView} >
-        <TextInput
-          style={styles.inputText}
-          placeholder="User Name"
-          placeholderTextColor="#ffffff"
-          onChangeText={(username) => setAuthData(prev => ({ ...prev, username }))}
-        />
-      </View>
+      <Input
+        placeholder="User Name"
+        onChangeText={(username) => setAuthData(prev => ({ ...prev, username }))}
+      />
 
-      <View style={styles.inputView} >
-        <TextInput
-          style={styles.inputText}
-          placeholder="Email"
-          placeholderTextColor="#ffffff"
-          onChangeText={(email) => setAuthData(prev => ({ ...prev, email }))}
-        />
-      </View>
+      <Input
+        placeholder="Email"
+        onChangeText={(email) => setAuthData(prev => ({ ...prev, email }))}
+      />
 
-      <View style={styles.inputView} >
-        <TextInput
-          secureTextEntry
-          style={styles.inputText}
-          placeholder="Password"
-          placeholderTextColor="#ffffff"
-          onChangeText={(password) => setAuthData(prev => ({ ...prev, password }))}
-        />
-      </View>
+      <Input
+        secureTextEntry
+        placeholder="Password"
+        onChangeText={(password) => setAuthData(prev => ({ ...prev, password }))}
+      />
 
-      <View style={styles.inputView} >
-        <TextInput
-          secureTextEntry
-          style={styles.inputText}
-          placeholder="Repeat Password"
-          placeholderTextColor="#ffffff"
-          onChangeText={(passwordRepeat) => setAuthData(prev => ({ ...prev, passwordRepeat }))}
-        />
-      </View>
+      <Input
+        secureTextEntry
+        placeholder="Repeat Password"
+        onChangeText={(passwordRepeat) => setAuthData(prev => ({ ...prev, passwordRepeat }))}
+      />
 
       <TouchableOpacity style={styles.loginBtn} onPress={onRegister}>
         <Text style={styles.loginText}>Sign Up</Text>
@@ -104,19 +90,6 @@ const styles = StyleSheet.create({
     fontSize:50,
     color:"#fb5b5a",
     marginBottom:40
-  },
-  inputView:{
-    width:"80%",
-    backgroundColor:"#465881",
-    borderRadius:25,
-    height:50,
-    marginBottom:20,
-    justifyContent:"center",
-    padding:20
-  },
-  inputText:{
-    height:50,
-    color:"white"
   },
   loginBtn:{
     width:"80%",

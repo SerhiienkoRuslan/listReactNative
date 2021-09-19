@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { gql, useMutation, useApolloClient } from '@apollo/client';
+
+import Input from 'components/Input';
 
 import routesName from 'constants/routesName';
 import authHelpers from 'helpers/auth.helpers';
@@ -41,24 +43,16 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.logo}>SoWhat?</Text>
 
-      <View style={styles.inputView} >
-        <TextInput
-          style={styles.inputText}
-          placeholder="Email"
-          placeholderTextColor="#ffffff"
-          onChangeText={(email) => setAuthData(prev => ({ ...prev, email }))}
-        />
-      </View>
+      <Input
+        placeholder="Email"
+        onChangeText={(email) => setAuthData(prev => ({ ...prev, email }))}
+      />
 
-      <View style={styles.inputView} >
-        <TextInput
-          secureTextEntry
-          style={styles.inputText}
-          placeholder="Password"
-          placeholderTextColor="#ffffff"
-          onChangeText={(password) => setAuthData(prev => ({ ...prev, password }))}
-        />
-      </View>
+      <Input
+        placeholder="Password"
+        onChangeText={(password) => setAuthData(prev => ({ ...prev, password }))}
+        secureTextEntry
+      />
 
       <TouchableOpacity>
         <Text style={styles.forgot}>Forgot Password?</Text>
@@ -87,19 +81,6 @@ const styles = StyleSheet.create({
     fontSize:50,
     color:"#fb5b5a",
     marginBottom:40
-  },
-  inputView:{
-    width:"80%",
-    backgroundColor:"#465881",
-    borderRadius:25,
-    height:50,
-    marginBottom:20,
-    justifyContent:"center",
-    padding:20
-  },
-  inputText:{
-    height:50,
-    color:"white"
   },
   forgot:{
     color:"white",

@@ -1,5 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 import routesName from 'constants/routesName';
 
@@ -17,11 +19,24 @@ import RegistrationScreen from 'screens/RegistrationScreen';
 // Profile pages
 import ProfileScreen from 'screens/ProfileScreen';
 
+// Message pages
+import MessageListScreen from 'screens/MessageListScreen';
+import MessageScreen from 'screens/MessageScreen';
+
 const Stack = createStackNavigator();
 
 import { screenOptions } from 'styles';
 
-const MainStackNavigator = () => {
+const navBtn = (navigation) => (
+  <TouchableOpacity
+    onPress={() => navigation?.openDrawer()}
+    style={{ padding: 10 }}
+  >
+    <FontAwesome name="navicon" size={24} color="white" />
+  </TouchableOpacity>
+)
+
+const MainStackNavigator = ({ navigation }) => {
   return (
     <Stack.Navigator
       initialRouteName={routesName.HOME_SCREEN}
@@ -30,13 +45,16 @@ const MainStackNavigator = () => {
       <Stack.Screen
         name={routesName.HOME_SCREEN}
         component={HomeScreen}
-        options={{ title: 'All Posts' }}
+        options={{
+          title: 'All Posts',
+          headerLeft: () => navBtn(navigation)
+        }}
       />
 
       <Stack.Screen
         name={routesName.POST_SCREEN}
         component={PostScreen}
-        options={({ route: { params: { list: { title } } } }) => ({
+        options={({ route: { params: { post: { title } } } }) => ({
           title: title,
           gestureResponseDistance: { horizontal: 500 }
         })}
@@ -45,7 +63,7 @@ const MainStackNavigator = () => {
   );
 }
 
-const ProfileStackNavigator = () => {
+const ProfileStackNavigator = ({ navigation }) => {
   return (
     <Stack.Navigator
       initialRouteName={routesName.PROFILE_SCREEN}
@@ -54,7 +72,10 @@ const ProfileStackNavigator = () => {
       <Stack.Screen
         name={routesName.PROFILE_SCREEN}
         component={ProfileScreen}
-        options={{ title: routesName.PROFILE_SCREEN }}
+        options={{
+          title: routesName.PROFILE_SCREEN,
+          headerLeft: () => navBtn(navigation)
+        }}
       />
     </Stack.Navigator>
   );
@@ -73,6 +94,33 @@ const CreatePostStackNavigator = () => {
       />
     </Stack.Navigator>
   );
+}
+
+const MessageStackNavigator = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      initialRouteName={routesName.CREATE_POST_SCREEN}
+      screenOptions={screenOptions}
+    >
+      <Stack.Screen
+        name={routesName.MESSAGE_SCREEN}
+        component={MessageListScreen}
+        options={{
+          title: 'Messages',
+          headerLeft: () => navBtn(navigation)
+        }}
+      />
+
+      <Stack.Screen
+        name={routesName.CHAT_SCREEN}
+        component={MessageScreen}
+        options={({ route: { params: { message: { title } } } }) => ({
+          title: title,
+          gestureResponseDistance: { horizontal: 500 }
+        })}
+      />
+    </Stack.Navigator>
+  )
 }
 
 const AuthStackNavigator = () => {
@@ -96,4 +144,4 @@ const AuthStackNavigator = () => {
   );
 }
 
-export { MainStackNavigator, ProfileStackNavigator, AuthStackNavigator, CreatePostStackNavigator };
+export { MainStackNavigator, ProfileStackNavigator, AuthStackNavigator, CreatePostStackNavigator, MessageStackNavigator };
