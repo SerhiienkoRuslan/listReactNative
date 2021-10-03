@@ -1,8 +1,8 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import { gql, useQuery } from '@apollo/client'
+import React from 'react';
+import { View, Text } from 'react-native';
+import { gql, useQuery } from '@apollo/client';
 
-import Loading from 'components/Loading'
+import Loading from 'components/Loading';
 
 const POST_QUERY = gql`
   query Post($id: ID!) {

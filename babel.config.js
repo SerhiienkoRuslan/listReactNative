@@ -20,7 +20,8 @@ module.exports = function (api) {
             constants: './src/constants',
             navigation: './src/navigation',
             helpers: './src/helpers',
-            graphqlVar: './src/graphqlVar'
+            graphqlVar: './src/graphqlVar',
+            context: './src/context'
           }
         }
       ]

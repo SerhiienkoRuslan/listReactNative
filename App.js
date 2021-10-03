@@ -10,6 +10,8 @@ import authHelpers from 'helpers/auth.helpers';
 
 import Navigation from "navigation/Navigation";
 
+import { MessageProvider } from './src/context/message';
+
 const cache = new InMemoryCache();
 const httpLink = createHttpLink({ uri: API_URL });
 
@@ -34,7 +36,7 @@ const client = new ApolloClient({
       }
     }
   }
-})
+});
 
 export default function App() {
   const [loadingCache, setLoadingCache] = useState(true);
@@ -50,7 +52,9 @@ export default function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Navigation />
+      <MessageProvider>
+        <Navigation />
+      </MessageProvider>
     </ApolloProvider>
   )
 }
