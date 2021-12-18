@@ -4,11 +4,11 @@ import { gql, useQuery } from '@apollo/client';
 
 import MessagesList from 'components/MessagesList';
 import Loading from 'components/Loading';
-import { useMessageDispatch, useMessageState } from '../../context/message';
 
 const GET_USERS = gql`
   query getUsers {
     getUsers {
+      id
       username
       createdAt
       latestMessage {
@@ -22,24 +22,20 @@ const GET_USERS = gql`
   }
 `
 
-const MessageListScreen = () => {
-  const dispatch = useMessageDispatch();
-  const { users } = useMessageState();
-
+const MessageListScreen = ({ navigation }) => {
   let usersMarkup;
 
-  const { loading } = useQuery(GET_USERS, {
-    onCompleted: (data) =>
-      dispatch({ type: 'SET_USERS', payload: data.getUsers }),
-    onError: (err) => console.log(err)
-  });
+  const { data, loading } = useQuery(GET_USERS);
 
-  if (!users || loading) {
+  if (!data || loading) {
     usersMarkup = <Loading />
-  } else if (users.length === 0) {
+  } else if (data?.getUsers?.length === 0) {
     usersMarkup = <Text>No users have joined yet</Text>
-  } else if (users.length > 0) {
-    usersMarkup = <MessagesList />
+  } else if (data?.getUsers?.length > 0) {
+    usersMarkup = <MessagesList
+      navigation={navigation}
+      users={data?.getUsers}
+    />
   }
 
   return (

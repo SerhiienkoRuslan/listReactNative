@@ -114,7 +114,7 @@ const MessageStackNavigator = ({ navigation }) => {
       <Stack.Screen
         name={routesName.CHAT_SCREEN}
         component={MessageScreen}
-        options={({ route: { params: { message: { title } } } }) => ({
+        options={({ route: { params: { messager: { title } } } }) => ({
           title: title,
           gestureResponseDistance: { horizontal: 500 }
         })}

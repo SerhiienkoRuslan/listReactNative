@@ -3,6 +3,8 @@ import { Text, FlatList, Pressable } from 'react-native';
 import { gql, useQuery } from '@apollo/client';
 import { AppLoading } from 'expo';
 
+import routesName from 'constants/routesName';
+
 import styles from './styles';
 
 const POSTS_QUERY = gql`
@@ -37,7 +39,7 @@ export default ({ navigation }) => {
       renderItem={({ item }) => (
         <ListItem
           post={item}
-          onPress={() => navigation.navigate('Post', { post: item })}
+          onPress={() => navigation.navigate(routesName.POST_SCREEN, { post: item })}
         />
       )}
       keyExtractor={(post) => post.id.toString()}
