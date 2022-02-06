@@ -24,6 +24,7 @@ const NEW_MESSAGE = gql`
   subscription newMessage {
     newMessage {
       from
+      to
       content
     }
   }
