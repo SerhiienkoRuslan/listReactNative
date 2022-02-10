@@ -27,16 +27,19 @@
     "react-dom": "16.13.1",
     "react-native": "0.64.0",
     "react-native-dotenv": "^3.1.1",
-    "react-native-gesture-handler": "~1.7.0",
+    "react-native-gesture-handler": "~1.9.0",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "subscriptions-transport-ws": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@babel/plugin-proposal-optional-chaining": "^7.14.5",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.3"
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "prettier": "2.2.1",
+    "react-devtools": "^4.19.1"
   },
   "private": true,
   "engines": {

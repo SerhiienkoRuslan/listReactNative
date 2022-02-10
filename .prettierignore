@@ -1,0 +1,9 @@
+build
+coverage
+.deploy
+.yarn
+.expo
+assets
+node_modules
+public
+tmp

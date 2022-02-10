@@ -3,9 +3,15 @@ import { StyleSheet, TextInput, View } from 'react-native';
 
 import uiElementSize from 'constants/uiElementSize';
 
-const Input = ({ onChangeText, placeholderTextColor, placeholder, secureTextEntry, ...props }) => {
+const Input = ({
+  onChangeText,
+  placeholderTextColor,
+  placeholder,
+  secureTextEntry,
+  ...props
+}) => {
   return (
-    <View style={styles.inputView} >
+    <View style={styles.inputView}>
       <TextInput
         {...props}
         style={styles.inputText}
@@ -19,17 +25,17 @@ const Input = ({ onChangeText, placeholderTextColor, placeholder, secureTextEntr
 };
 
 const styles = StyleSheet.create({
-  inputView:{
-    width: "80%",
-    backgroundColor: "#465881",
+  inputView: {
+    width: '80%',
+    backgroundColor: '#465881',
     borderRadius: uiElementSize.BORDER_RADIUS,
     height: uiElementSize.HEIGHT,
     marginBottom: 20,
-    justifyContent: "center",
+    justifyContent: 'center',
     padding: 20
   },
-  inputText:{
-    color: "white"
+  inputText: {
+    color: 'white'
   }
 });
 

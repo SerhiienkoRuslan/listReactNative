@@ -8,11 +8,6 @@ const messageReducer = (state, action) => {
   const { username, message, messages, reaction } = action.payload;
 
   switch (action.type) {
-    case 'SET_USERS':
-      return {
-        ...state,
-        users: action.payload,
-      };
     case 'SET_USER_MESSAGES':
       usersCopy = [...state.users]
 
@@ -24,16 +19,7 @@ const messageReducer = (state, action) => {
         ...state,
         users: usersCopy
       };
-    case 'SET_SELECTED_USER':
-      usersCopy = state.users.map((user) => ({
-        ...user,
-        selected: user.username === action.payload
-      }))
 
-      return {
-        ...state,
-        users: usersCopy,
-      }
     case 'ADD_MESSAGE':
       usersCopy = [...state.users]
 

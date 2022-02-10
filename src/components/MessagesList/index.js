@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
+import React from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { FlatList, RectButton } from 'react-native-gesture-handler';
 
-import { useMessageDispatch, useMessageState } from '../../context/message';
+import routesName from 'constants/routesName';
 
 import AppleStyleSwipeableRow from './AppleStyleSwipeableRow';
 
-const MessagesList = () => {
-  const [isSwiping, setSwiping] = useState(false);
-  const dispatch = useMessageDispatch();
-  const { users } = useMessageState();
-
-  const selectedUser = users?.find((u) => u.selected === true)?.username;
+const MessagesList = ({ navigation, users }) => {
+  const isWeb = Platform.OS === 'web';
 
   const Row = ({ item }) => {
-    const selected = selectedUser === item.username;
-
     return (
       <RectButton
         style={styles.rectButton}
         onPress={() => {
-          console.log('-pr')
-          dispatch({ type: 'SET_SELECTED_USER', payload: item.username });
+          navigation?.navigate(
+            routesName.CHAT_SCREEN,
+            {
+              messager: {
+                ...item,
+                id: item.id,
+                title: item.username || 'Messager'
+              }
+            }
+          )
         }}
       >
         <Text style={styles.fromText}>
@@ -30,30 +31,40 @@ const MessagesList = () => {
         </Text>
 
         <Text numberOfLines={2} style={styles.messageText}>
-          {item?.latestMessage?.content || ''}
+          {item?.latestMessage?.content || 'No Message yet'}
         </Text>
 
         <Text style={styles.dateText}>
-          {item?.latestMessage?.createdAt ? new Date(item?.latestMessage?.createdAt).toISOString().split('T')[0] : ''}
+          {item?.latestMessage?.createdAt
+            ? new Date(item?.latestMessage?.createdAt)
+              .toISOString()
+              .split('T')[0]
+            : ''}
           {' '}❭
         </Text>
       </RectButton>
     )
   };
 
-  const ItemSwipeable = (item) => (
-    <AppleStyleSwipeableRow>
-      <Row item={item} />
-    </AppleStyleSwipeableRow>
-  );
+  const ItemSwipeable = (item) => {
+    if (isWeb) {
+      return <Row item={item} />
+    }
+
+    return (
+      <AppleStyleSwipeableRow>
+        <Row item={item} />
+      </AppleStyleSwipeableRow>
+    )
+  };
 
   return (
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       style={{ flexGrow: 1 }}
       data={users || []}
-      scrollEnabled={!isSwiping}
       renderItem={({ item }) => ItemSwipeable(item)}
+      keyExtractor={(item) => item.id.toString()}
     />
   );
 };
