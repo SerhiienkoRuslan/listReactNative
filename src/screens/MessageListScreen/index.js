@@ -20,7 +20,7 @@ const GET_USERS = gql`
       }
     }
   }
-`
+`;
 
 const MessageListScreen = ({ navigation }) => {
   let usersMarkup;
@@ -28,21 +28,16 @@ const MessageListScreen = ({ navigation }) => {
   const { data, loading } = useQuery(GET_USERS);
 
   if (!data || loading) {
-    usersMarkup = <Loading />
+    usersMarkup = <Loading />;
   } else if (data?.getUsers?.length === 0) {
-    usersMarkup = <Text>No users have joined yet</Text>
+    usersMarkup = <Text>No users have joined yet</Text>;
   } else if (data?.getUsers?.length > 0) {
-    usersMarkup = <MessagesList
-      navigation={navigation}
-      users={data?.getUsers}
-    />
+    usersMarkup = (
+      <MessagesList navigation={navigation} users={data?.getUsers} />
+    );
   }
 
-  return (
-    <View style={{ flexGrow: 1 }}>
-      {usersMarkup}
-    </View>
-  );
+  return <View style={{ flexGrow: 1 }}>{usersMarkup}</View>;
 };
 
 export default MessageListScreen;
