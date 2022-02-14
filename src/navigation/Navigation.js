@@ -8,16 +8,16 @@ import { useQuery } from '@apollo/client';
 import graphqlVar from 'graphqlVar';
 
 import DrawerNavigator from 'navigation/DrawerNavigator';
-import { AuthStackNavigator } from "navigation/StackNavigator";
+import { AuthStackNavigator } from 'navigation/StackNavigator';
 
 const cacheResourcesAsync = async () => {
   const images = [require('../../assets/splash.png')];
 
-  const cacheImages = images.map(image => {
+  const cacheImages = images.map((image) => {
     return Asset.fromModule(image).downloadAsync();
   });
   return Promise.all(cacheImages);
-}
+};
 
 export default function Navigation() {
   const { data, loading, error } = useQuery(graphqlVar.IS_LOGGED_IN);
@@ -31,17 +31,14 @@ export default function Navigation() {
         onFinish={() => console.log('loading...')}
         onError={console.warn(error, '!')}
       />
-    )
+    );
   }
 
   return (
     <NavigationContainer>
-      {isLoggedIn
-        ? <DrawerNavigator />
-        : <AuthStackNavigator />
-      }
+      {isLoggedIn ? <DrawerNavigator /> : <AuthStackNavigator />}
 
       <StatusBar style="light" />
     </NavigationContainer>
-  )
+  );
 }
