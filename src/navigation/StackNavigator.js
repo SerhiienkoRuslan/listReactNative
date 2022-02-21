@@ -1,5 +1,6 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -34,7 +35,7 @@ const navBtn = (navigation) => (
   >
     <FontAwesome name="navicon" size={24} color="white" />
   </TouchableOpacity>
-)
+);
 
 const MainStackNavigator = ({ navigation }) => {
   return (
@@ -54,14 +55,20 @@ const MainStackNavigator = ({ navigation }) => {
       <Stack.Screen
         name={routesName.POST_SCREEN}
         component={PostScreen}
-        options={({ route: { params: { post: { title } } } }) => ({
+        options={({
+          route: {
+            params: {
+              post: { title }
+            }
+          }
+        }) => ({
           title: title,
           gestureResponseDistance: { horizontal: 500 }
         })}
       />
     </Stack.Navigator>
   );
-}
+};
 
 const ProfileStackNavigator = ({ navigation }) => {
   return (
@@ -79,7 +86,7 @@ const ProfileStackNavigator = ({ navigation }) => {
       />
     </Stack.Navigator>
   );
-}
+};
 
 const CreatePostStackNavigator = () => {
   return (
@@ -94,9 +101,20 @@ const CreatePostStackNavigator = () => {
       />
     </Stack.Navigator>
   );
-}
+};
 
-const MessageStackNavigator = ({ navigation }) => {
+const MessageStackNavigator = ({ navigation, route }) => {
+  React.useLayoutEffect(() => {
+    const routeName = getFocusedRouteNameFromRoute(route);
+    const tabHiddenRoutes = [routesName.CHAT_SCREEN];
+
+    if (tabHiddenRoutes.includes(routeName)) {
+      navigation.setOptions({ tabBarVisible: false });
+    } else {
+      navigation.setOptions({ tabBarVisible: true });
+    }
+  }, [navigation, route]);
+
   return (
     <Stack.Navigator
       initialRouteName={routesName.CREATE_POST_SCREEN}
@@ -114,14 +132,20 @@ const MessageStackNavigator = ({ navigation }) => {
       <Stack.Screen
         name={routesName.CHAT_SCREEN}
         component={MessageScreen}
-        options={({ route: { params: { messager: { title } } } }) => ({
+        options={({
+          route: {
+            params: {
+              messager: { title }
+            }
+          }
+        }) => ({
           title: title,
           gestureResponseDistance: { horizontal: 500 }
         })}
       />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 const AuthStackNavigator = () => {
   return (
@@ -142,6 +166,12 @@ const AuthStackNavigator = () => {
       />
     </Stack.Navigator>
   );
-}
+};
 
-export { MainStackNavigator, ProfileStackNavigator, AuthStackNavigator, CreatePostStackNavigator, MessageStackNavigator };
+export {
+  MainStackNavigator,
+  ProfileStackNavigator,
+  AuthStackNavigator,
+  CreatePostStackNavigator,
+  MessageStackNavigator
+};

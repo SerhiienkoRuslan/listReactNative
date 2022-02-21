@@ -7,27 +7,31 @@ import Input from 'components/Input';
 import graphqlVar from 'graphqlVar';
 
 const PROFILE_UPDATE = gql`
-  mutation profileMutation($id: Int!, $email: String, $username: String) {
-    updateProfile(id: $id, email: $email, username: $username) {
-        email, username
+  mutation profileMutation($id: Int!, $email: String, $name: String) {
+    updateProfile(_id: $id, email: $email, name: $name) {
+      email
+      name
     }
   }
 `;
 
 const defaultProfile = {
   email: null,
-  username: null
-}
+  name: null
+};
 
 const ProfileScreen = () => {
   const client = useApolloClient();
   const [submitProfile] = useMutation(PROFILE_UPDATE);
   const profileDataCache = client.readQuery({ query: graphqlVar.ME_QUERY });
-  const [profileData, setProfile] = useState(profileDataCache?.me || defaultProfile);
+  const [profileData, setProfile] = useState(
+    profileDataCache?.me || defaultProfile
+  );
 
   const onUpdateProfile = async () => {
-    await submitProfile({ variables: { ...profileData } })
-      .then(({ data }) => setProfile(prev => ({ ...prev, ...data?.updateProfile })));
+    await submitProfile({ variables: { ...profileData } }).then(({ data }) =>
+      setProfile((prev) => ({ ...prev, ...data?.updateProfile }))
+    );
   };
 
   return (
@@ -35,43 +39,43 @@ const ProfileScreen = () => {
       <Text>Profile</Text>
 
       <Input
-        value={profileData?.username || ''}
+        value={profileData?.name || ''}
         placeholder="User Name"
-        onChangeText={(username) => setProfile(prev => ({ ...prev, username }))}
+        onChangeText={(name) => setProfile((prev) => ({ ...prev, name }))}
       />
 
       <Input
         value={profileData?.email || ''}
         placeholder="Email"
-        onChangeText={(email) => setProfile(prev => ({ ...prev, email }))}
+        onChangeText={(email) => setProfile((prev) => ({ ...prev, email }))}
       />
 
       <TouchableOpacity style={styles.submitBtn} onPress={onUpdateProfile}>
         <Text style={styles.submitBtnText}>Submit</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   center: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center'
   },
-  submitBtn:{
-    width:"80%",
-    backgroundColor:"#fb5b5a",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    marginTop:40,
-    marginBottom:10
+  submitBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10
   },
-  submitBtnText:{
-    color:"white"
+  submitBtnText: {
+    color: 'white'
   }
 });
 

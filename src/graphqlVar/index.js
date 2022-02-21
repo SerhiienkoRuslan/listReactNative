@@ -9,7 +9,9 @@ const IS_LOGGED_IN = gql`
 const ME_QUERY = gql`
   query ME_QUERY {
     me {
-      id, username, email
+      _id
+      name
+      email
     }
   }
 `;

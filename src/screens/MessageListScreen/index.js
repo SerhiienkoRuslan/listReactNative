@@ -8,14 +8,14 @@ import Loading from 'components/Loading';
 const GET_USERS = gql`
   query getUsers {
     getUsers {
-      id
-      username
+      _id
+      name
       createdAt
       latestMessage {
-        uuid
+        _id
         from
         to
-        content
+        text
         createdAt
       }
     }
