@@ -1,16 +1,14 @@
 import React from 'react';
 import Navigation from './navigation/Navigation';
-import { MessageProvider, UserProvider } from './context';
+import { GlobalProvider } from './context';
 import ApolloProvider from './ApolloProvider';
 
 const Main = () => {
   return (
     <ApolloProvider>
-      <UserProvider>
-        <MessageProvider>
-          <Navigation />
-        </MessageProvider>
-      </UserProvider>
+      <GlobalProvider>
+        <Navigation />
+      </GlobalProvider>
     </ApolloProvider>
   );
 };

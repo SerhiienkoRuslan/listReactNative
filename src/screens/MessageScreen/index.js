@@ -6,14 +6,14 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import Loading from 'components/Loading';
 import ChatItem from './components/ChatItem';
 
-import { useUserState } from 'context/user';
+import { useGlobalState } from 'context';
 
 import { MESSAGER_QUERY, NEW_MESSAGE, SEND_MESSAGE } from './graphql';
 import styles from './styles';
 
 const MessageScreen = ({ route }) => {
   const id = route?.params?.messager?._id;
-  const { user } = useUserState();
+  const { user } = useGlobalState();
 
   const [messangerData, setMessangerData] = useState({
     messages: [],
