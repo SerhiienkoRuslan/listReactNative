@@ -12,16 +12,24 @@ import authHelpers from 'helpers/auth.helpers';
 import graphqlVar from 'graphqlVar';
 import routesName from 'constants/routesName';
 
+import { useUserDispatch } from 'context/user';
+import { SET_CURRENT_USER } from 'context/actions';
+
 import { ProfileStackNavigator } from './StackNavigator';
 import TabNavigator from './TabNavigator';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
-  const { error } = useQuery(graphqlVar.ME_QUERY);
+  const dispatch = useUserDispatch();
   const client = useApolloClient();
 
-  if (error) authHelpers.handleLogout(client);
+  useQuery(graphqlVar.ME_QUERY, {
+    onCompleted: (data) => {
+      dispatch({ type: SET_CURRENT_USER, payload: { user: data.me } });
+    },
+    onError: () => authHelpers.handleLogout(client)
+  });
 
   const CustomDrawerContent = (props) => {
     return (

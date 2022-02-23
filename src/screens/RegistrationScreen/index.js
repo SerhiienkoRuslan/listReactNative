@@ -10,9 +10,9 @@ const REGISTRATION = gql`
   mutation registerMutation(
     $email: String!
     $password: String!
-    $username: String
+    $name: String
   ) {
-    registerUser(email: $email, password: $password, username: $username) {
+    registerUser(email: $email, password: $password, name: $name) {
       token
     }
   }
@@ -23,7 +23,7 @@ const RegistrationScreen = ({ navigation }) => {
   const [submitRegistration] = useMutation(REGISTRATION);
   const [authData, setAuthData] = useState({
     email: null,
-    username: null,
+    name: null,
     password: null,
     passwordRepeat: null
   });
@@ -40,9 +40,7 @@ const RegistrationScreen = ({ navigation }) => {
     <AuthLayout handleSubmit={onRegister} navigation={navigation}>
       <Input
         placeholder="User Name"
-        onChangeText={(username) =>
-          setAuthData((prev) => ({ ...prev, username }))
-        }
+        onChangeText={(name) => setAuthData((prev) => ({ ...prev, name }))}
       />
 
       <Input

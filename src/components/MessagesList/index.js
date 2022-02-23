@@ -14,48 +14,43 @@ const MessagesList = ({ navigation, users }) => {
       <RectButton
         style={styles.rectButton}
         onPress={() => {
-          navigation?.navigate(
-            routesName.CHAT_SCREEN,
-            {
-              messager: {
-                ...item,
-                id: item.id,
-                title: item.username || 'Messager'
-              }
+          navigation?.navigate(routesName.CHAT_SCREEN, {
+            messager: {
+              ...item,
+              id: item.id,
+              title: item.name || 'Messager'
             }
-          )
+          });
         }}
       >
-        <Text style={styles.fromText}>
-          {item?.username || ''}
-        </Text>
+        <Text style={styles.fromText}>{item?.name || ''}</Text>
 
         <Text numberOfLines={2} style={styles.messageText}>
-          {item?.latestMessage?.content || 'No Message yet'}
+          {item?.latestMessage?.text || 'No Message yet'}
         </Text>
 
         <Text style={styles.dateText}>
           {item?.latestMessage?.createdAt
             ? new Date(item?.latestMessage?.createdAt)
-              .toISOString()
-              .split('T')[0]
-            : ''}
-          {' '}❭
+                .toISOString()
+                .split('T')[0]
+            : ''}{' '}
+          ❭
         </Text>
       </RectButton>
-    )
+    );
   };
 
   const ItemSwipeable = (item) => {
     if (isWeb) {
-      return <Row item={item} />
+      return <Row item={item} />;
     }
 
     return (
       <AppleStyleSwipeableRow>
         <Row item={item} />
       </AppleStyleSwipeableRow>
-    )
+    );
   };
 
   return (
@@ -64,7 +59,7 @@ const MessagesList = ({ navigation, users }) => {
       style={{ flexGrow: 1 }}
       data={users || []}
       renderItem={({ item }) => ItemSwipeable(item)}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item) => item._id.toString()}
     />
   );
 };
