@@ -37,10 +37,11 @@ export const MESSAGER_QUERY = gql`
 export const NEW_MESSAGE = gql`
   subscription newMessage {
     newMessage {
+      _id
       from
       to
       text
-      _id
+      createdAt
       user {
         _id
         name
