@@ -1,4 +1,7 @@
 import { Platform, StyleSheet } from 'react-native';
+import colors from 'styles/colors';
+
+const { GREY } = colors;
 
 export default StyleSheet.create({
   wrap: {
@@ -11,8 +14,10 @@ export default StyleSheet.create({
   slackAvatar: {
     height: 40,
     width: 40,
-    borderRadius: 3
+    borderRadius: 3,
+    backgroundColor: GREY
   },
+  slackAvatarContainer: {},
   emoji: {
     fontSize: 28,
     lineHeight: Platform.OS === 'android' ? 34 : 30

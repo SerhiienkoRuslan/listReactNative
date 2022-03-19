@@ -33,6 +33,8 @@ const ChatItem = (props) => {
 
   const renderAvatar = () => {
     let extraStyle;
+    const avatarProps = getInnerComponentProps();
+
     if (
       isSameUser(currentMessage, previousMessage) &&
       isSameDay(currentMessage, previousMessage)
@@ -41,11 +43,12 @@ const ChatItem = (props) => {
       extraStyle = { height: 0 };
     }
 
-    const avatarProps = getInnerComponentProps();
-
     return (
       <Avatar
         {...avatarProps}
+        containerStyle={{
+          left: [styles.slackAvatarContainer]
+        }}
         imageStyle={{
           left: [styles.slackAvatar, avatarProps.imageStyle, extraStyle]
         }}

@@ -5,14 +5,14 @@ import { gql, useQuery } from '@apollo/client';
 import Loading from 'components/Loading';
 
 const POST_QUERY = gql`
-  query Post($id: ID!) {
+  query Post($id: Int!) {
     getPost(id: $id) {
       id
       title
       content
     }
   }
-`
+`;
 
 const PostScreen = ({ route }) => {
   const { data, loading } = useQuery(POST_QUERY, {
@@ -20,14 +20,14 @@ const PostScreen = ({ route }) => {
   });
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
     <View>
       <Text>{data?.getPost?.content || ''}</Text>
     </View>
-  )
-}
+  );
+};
 
 export default PostScreen;
