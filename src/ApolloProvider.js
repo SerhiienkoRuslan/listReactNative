@@ -4,8 +4,10 @@ import {
   InMemoryCache,
   ApolloProvider as Provider,
   split,
-  HttpLink
+  HttpLink,
+  from
 } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,6 +17,7 @@ import { setContext } from 'apollo-link-context';
 import { API_URL, API_WS } from '@env';
 
 import authHelpers from 'helpers/auth.helpers';
+import errorHelpers from 'helpers/error.helpers';
 
 const cache = new InMemoryCache();
 
@@ -39,6 +42,8 @@ const wsLink = new WebSocketLink({
   // }
 });
 
+const errorLink = onError((dataErr) => errorHelpers(dataErr, cache));
+
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
@@ -48,7 +53,7 @@ const splitLink = split(
     );
   },
   wsLink,
-  authLink.concat(httpLinkCreate)
+  authLink.concat(from([errorLink, httpLinkCreate]))
 );
 
 const client = new ApolloClient({

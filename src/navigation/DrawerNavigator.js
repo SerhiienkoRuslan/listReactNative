@@ -28,7 +28,7 @@ const DrawerNavigator = () => {
     onCompleted: (data) => {
       dispatch({ type: SET_CURRENT_USER, payload: { user: data.me } });
     },
-    onError: () => authHelpers.handleLogout(client)
+    onError: () => authHelpers.handleLogout(client.cache)
   });
 
   const CustomDrawerContent = (props) => {
@@ -40,7 +40,7 @@ const DrawerNavigator = () => {
           label="Logout"
           onPress={() => {
             DrawerActions.closeDrawer();
-            authHelpers.handleLogout(client);
+            authHelpers.handleLogout(client.cache);
           }}
         />
       </DrawerContentScrollView>

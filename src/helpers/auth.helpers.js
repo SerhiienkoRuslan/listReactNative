@@ -33,9 +33,9 @@ const deleteToken = async () => {
   }
 };
 
-const handleLogout = (client) => {
+const handleLogout = (cache) => {
   deleteToken();
-  client.cache.writeQuery({
+  cache.writeQuery({
     query: graphqlVar.IS_LOGGED_IN,
     data: {
       isLoggedIn: false
