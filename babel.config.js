@@ -1,14 +1,26 @@
 module.exports = function (api) {
-  api.cache(true)
+  api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: [
+      [
+        'babel-preset-expo',
+        {
+          // Use React 17 automatic JSX runtime.
+          jsxRuntime: 'automatic'
+        }
+      ]
+    ],
     plugins: [
-      ["module:react-native-dotenv", {
-        "moduleName": "@env",
-        "path": ".env"
-      }],
-      "@babel/plugin-proposal-optional-chaining",
-      "transform-inline-environment-variables",
+      [
+        'module:react-native-dotenv',
+        {
+          moduleName: '@env',
+          path: '.env'
+        }
+      ],
+      '@babel/plugin-proposal-optional-chaining',
+      'transform-inline-environment-variables',
+      'react-native-reanimated/plugin',
       [
         'module-resolver',
         {
@@ -26,5 +38,5 @@ module.exports = function (api) {
         }
       ]
     ]
-  }
-}
+  };
+};

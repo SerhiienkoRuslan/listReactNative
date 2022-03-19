@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, FlatList, Pressable } from 'react-native';
 import { gql, useQuery } from '@apollo/client';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 
 import routesName from 'constants/routesName';
 
@@ -14,7 +14,7 @@ const POSTS_QUERY = gql`
       title
     }
   }
-`
+`;
 
 const ListItem = ({ post, onPress }) => {
   const { title } = post;
@@ -23,14 +23,14 @@ const ListItem = ({ post, onPress }) => {
     <Pressable style={styles.item} onPress={onPress}>
       <Text style={styles.header}>{title}</Text>
     </Pressable>
-  )
-}
+  );
+};
 
 export default ({ navigation }) => {
   const { data, loading } = useQuery(POSTS_QUERY);
 
   if (loading) {
-    return <AppLoading />
+    return <AppLoading />;
   }
 
   return (
@@ -39,10 +39,12 @@ export default ({ navigation }) => {
       renderItem={({ item }) => (
         <ListItem
           post={item}
-          onPress={() => navigation.navigate(routesName.POST_SCREEN, { post: item })}
+          onPress={() =>
+            navigation.navigate(routesName.POST_SCREEN, { post: item })
+          }
         />
       )}
       keyExtractor={(post) => post.id.toString()}
     />
-  )
-}
+  );
+};

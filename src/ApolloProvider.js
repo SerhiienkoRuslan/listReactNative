@@ -8,9 +8,9 @@ import {
 } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistCache } from 'apollo3-cache-persist';
-import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading';
 import { setContext } from 'apollo-link-context';
 import { API_URL, API_WS } from '@env';
 

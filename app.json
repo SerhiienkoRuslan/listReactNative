@@ -1,7 +1,9 @@
 {
+  "name": "listReactNative",
+  "displayName": "listReactNative",
   "expo": {
-    "name": "SoWhat?",
-    "slug": "so_what",
+    "name": "listReactNative",
+    "slug": "listReactNative",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

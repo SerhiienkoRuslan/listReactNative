@@ -49,8 +49,13 @@ const DrawerNavigator = () => {
 
   return (
     <Drawer.Navigator drawerContent={CustomDrawerContent}>
-      <Drawer.Screen name={routesName.HOME_SCREEN} component={TabNavigator} />
       <Drawer.Screen
+        options={{ headerShown: false }}
+        name={routesName.HOME_SCREEN}
+        component={TabNavigator}
+      />
+      <Drawer.Screen
+        options={{ headerShown: false }}
         name={routesName.PROFILE_SCREEN}
         component={ProfileStackNavigator}
       />

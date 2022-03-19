@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard';
+// import Clipboard from '@react-native-clipboard/clipboard';
 import {
   MessageText,
   MessageImage,
@@ -38,24 +38,24 @@ const Bubble = (props, context) => {
     if (onLongPress) {
       onLongPress(context, currentMessage);
     } else {
-      if (currentMessage.text) {
-        const options = ['Copy Text', 'Cancel'];
-        const cancelButtonIndex = options.length - 1;
-
-        context.actionSheet().showActionSheetWithOptions(
-          {
-            options,
-            cancelButtonIndex
-          },
-          (buttonIndex) => {
-            switch (buttonIndex) {
-              case 0:
-                Clipboard.setString(currentMessage.text);
-                break;
-            }
-          }
-        );
-      }
+      // if (currentMessage.text) {
+      //   const options = ['Copy Text', 'Cancel'];
+      //   const cancelButtonIndex = options.length - 1;
+      //
+      //   context.actionSheet().showActionSheetWithOptions(
+      //     {
+      //       options,
+      //       cancelButtonIndex
+      //     },
+      //     (buttonIndex) => {
+      //       switch (buttonIndex) {
+      //         case 0:
+      //           Clipboard.setString(currentMessage.text);
+      //           break;
+      //       }
+      //     }
+      //   );
+      // }
     }
   };
 
