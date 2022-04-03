@@ -1,4 +1,5 @@
 import authHelpers from 'helpers/auth.helpers';
+import graphqlVar from 'graphqlVar';
 
 const UNAUTHENTICATED = 'UNAUTHENTICATED';
 
@@ -16,5 +17,12 @@ export default (dataErr, cache) => {
       console.log(`[GraphQL error]: Message: ${message}`);
     });
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
+  if (networkError) {
+    cache.writeQuery({
+      query: graphqlVar.IS_ERROR,
+      data: {
+        isError: true
+      }
+    });
+  }
 };

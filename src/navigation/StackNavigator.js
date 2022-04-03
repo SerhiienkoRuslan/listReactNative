@@ -24,6 +24,9 @@ import ProfileScreen from 'screens/ProfileScreen';
 import MessageListScreen from 'screens/MessageListScreen';
 import MessageScreen from 'screens/MessageScreen';
 
+// Error page
+import ErrorBoundary from 'screens/ErrorBoundary';
+
 const Stack = createStackNavigator();
 
 import { screenOptions } from 'styles';
@@ -164,6 +167,27 @@ const AuthStackNavigator = () => {
         component={LoginScreen}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name={routesName.ERROR_SCREEN}
+        component={ErrorBoundary}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ErrorStackNavigator = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName={routesName.ERROR_SCREEN}
+      screenOptions={screenOptions}
+    >
+      <Stack.Screen
+        name={routesName.ERROR_SCREEN}
+        component={ErrorBoundary}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
@@ -173,5 +197,6 @@ export {
   ProfileStackNavigator,
   AuthStackNavigator,
   CreatePostStackNavigator,
-  MessageStackNavigator
+  MessageStackNavigator,
+  ErrorStackNavigator
 };

@@ -1,33 +1,35 @@
 import { StyleSheet } from 'react-native';
+
 import colors from 'styles/colors';
 
-const { PINK } = colors;
-
-export const screenOptions = {
-  headerStyle: {
-    backgroundColor: PINK
-  },
-  headerTintColor: '#fff'
-};
-
 export default StyleSheet.create({
-  centered: {
+  container: {
     flex: 1,
+    backgroundColor: colors.backgroundColor,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  logo: {
+    fontWeight: 'bold',
+    fontSize: 50,
+    color: colors.primary,
+    marginBottom: 40
+  },
+  forgot: {
+    color: 'white',
+    fontSize: 11
+  },
+  loginBtn: {
+    width: '80%',
+    backgroundColor: colors.primary,
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+    marginTop: 40,
+    marginBottom: 10
   },
-  item: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 20,
-    paddingRight: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc'
-  },
-  header: {
-    fontWeight: 'bold'
-  },
-  subheader: {
-    paddingTop: 10
+  loginText: {
+    color: 'white'
   }
 });

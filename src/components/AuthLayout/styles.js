@@ -1,16 +1,18 @@
 import { StyleSheet } from 'react-native';
 
+import colors from 'styles/colors';
+
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#003f5c',
+    backgroundColor: colors.backgroundColor,
     alignItems: 'center',
     justifyContent: 'center'
   },
   logo: {
     fontWeight: 'bold',
     fontSize: 50,
-    color: '#fb5b5a',
+    color: colors.primary,
     marginBottom: 40
   },
   forgot: {
@@ -19,7 +21,7 @@ export default StyleSheet.create({
   },
   loginBtn: {
     width: '80%',
-    backgroundColor: '#fb5b5a',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     height: 50,
     alignItems: 'center',

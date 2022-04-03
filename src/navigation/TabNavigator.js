@@ -1,7 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 import routesName from 'constants/routesName';
+import colors from 'styles/colors';
 
 import {
   MainStackNavigator,
@@ -20,7 +22,7 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       initialRouteName={routesName.HOME_SCREEN}
       screenOptions={{
-        tabBarActiveTintColor: 'red',
+        tabBarActiveTintColor: colors.primary,
         tabBarShowLabel: false,
         headerTitle: '',
         headerShown: false
