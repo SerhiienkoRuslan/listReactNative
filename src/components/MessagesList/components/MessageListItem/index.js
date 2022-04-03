@@ -33,8 +33,7 @@ const MessageListItem = ({ item }) => {
               ? new Date(item?.latestMessage?.createdAt)
                   .toISOString()
                   .split('T')[0]
-              : ''}{' '}
-            ❭
+              : ''}
           </Text>
         </View>
 

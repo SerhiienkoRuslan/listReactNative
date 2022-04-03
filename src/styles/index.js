@@ -4,9 +4,9 @@ import colors from './colors';
 
 export const screenOptions = {
   headerStyle: {
-    backgroundColor: colors.primary
+    backgroundColor: colors.border
   },
-  headerTintColor: '#fff'
+  headerTintColor: '#dedddd'
 };
 
 export default StyleSheet.create({

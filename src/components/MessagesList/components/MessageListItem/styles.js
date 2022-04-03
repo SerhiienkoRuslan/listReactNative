@@ -25,7 +25,7 @@ export default StyleSheet.create({
     height: uiElementSize.AVATAR_SIZE,
     borderRadius: uiElementSize.AVATAR_RADIUS,
     marginTop: 2,
-    backgroundColor: colors.primary,
+    backgroundColor: `${colors.primary}80`,
     overflow: 'hidden',
     marginRight: 10
   },

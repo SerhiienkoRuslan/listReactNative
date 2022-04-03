@@ -1,5 +1,6 @@
 export default {
   backgroundColor: '#003f5c',
+  backgroundColorSecond: '#465881',
   primary: '#fb5b5a',
   card: '#033a50',
   text: '#2d7899',

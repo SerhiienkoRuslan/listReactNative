@@ -3,12 +3,16 @@ import { View } from 'react-native';
 import emojiUtils from 'emoji-utils';
 import { Avatar, Day, utils } from 'react-native-gifted-chat';
 
+import { useGlobalState } from 'context';
+import colors from 'styles/colors';
+
 import Bubble from './Bubble';
 import styles from './styles';
 
 const { isSameUser, isSameDay } = utils;
 
 const ChatItem = (props) => {
+  const { user } = useGlobalState();
   const { currentMessage, nextMessage, previousMessage, renderBubble } = props;
   const { text: currText, createdAt } = currentMessage;
   const isEmoji = currText && emojiUtils.isPureEmojiString(currText);
@@ -41,6 +45,8 @@ const ChatItem = (props) => {
     ) {
       // Set the invisible avatar height to 0, but keep the width, padding, etc.
       extraStyle = { height: 0 };
+    } else if (+currentMessage?.from === +user?._id) {
+      extraStyle = { backgroundColor: `${colors.backgroundColorSecond}80` };
     }
 
     return (
