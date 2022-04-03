@@ -1,15 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from 'styles/colors';
 
-const { PINK } = colors;
-
-export const screenOptions = {
-  headerStyle: {
-    backgroundColor: PINK
-  },
-  headerTintColor: '#fff'
-};
-
 export default StyleSheet.create({
   centered: {
     flex: 1,
@@ -17,15 +8,14 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   item: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 20,
-    paddingRight: 20,
+    minHeight: 50,
+    padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc'
+    borderBottomColor: colors.border
   },
   header: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: colors.text
   },
   subheader: {
     paddingTop: 10

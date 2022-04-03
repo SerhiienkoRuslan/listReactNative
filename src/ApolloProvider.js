@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider as Provider,
   split,
-  HttpLink
+  HttpLink,
+  from
 } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistCache } from 'apollo3-cache-persist';
-import AppLoading from 'expo-app-loading';
 import { setContext } from 'apollo-link-context';
 import { API_URL, API_WS } from '@env';
 
 import authHelpers from 'helpers/auth.helpers';
+import errorHelpers from 'helpers/error.helpers';
 
 const cache = new InMemoryCache();
 
@@ -39,6 +41,8 @@ const wsLink = new WebSocketLink({
   // }
 });
 
+const errorLink = onError((dataErr) => errorHelpers(dataErr, cache));
+
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
@@ -48,7 +52,7 @@ const splitLink = split(
     );
   },
   wsLink,
-  authLink.concat(httpLinkCreate)
+  authLink.concat(from([errorLink, httpLinkCreate]))
 );
 
 const client = new ApolloClient({
@@ -60,22 +64,21 @@ const client = new ApolloClient({
       async isLoggedIn() {
         const token = await authHelpers.getToken();
         return Boolean(token);
+      },
+      async isError() {
+        return false;
       }
     }
   }
 });
 
 export default function ApolloProvider({ children }) {
-  const [loadingCache, setLoadingCache] = useState(true);
-
   useEffect(() => {
     persistCache({
       cache,
       storage: AsyncStorage
-    }).then(() => setLoadingCache(false));
+    });
   }, []);
-
-  if (loadingCache) return <AppLoading />;
 
   return <Provider client={client}>{children}</Provider>;
 }

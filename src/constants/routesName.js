@@ -6,5 +6,6 @@ export default {
   REGISTRATION_SCREEN: 'Registration',
   LOGIN_SCREEN: 'Login',
   MESSAGE_SCREEN: 'Message',
-  CHAT_SCREEN: 'Chat'
+  CHAT_SCREEN: 'Chat',
+  ERROR_SCREEN: 'Error'
 };

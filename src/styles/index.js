@@ -1,19 +1,19 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
-export const PINK = '#ff5dc8'
+import colors from './colors';
 
 export const screenOptions = {
   headerStyle: {
-    backgroundColor: PINK,
+    backgroundColor: colors.border
   },
-  headerTintColor: '#fff',
-}
+  headerTintColor: '#dedddd'
+};
 
 export default StyleSheet.create({
   centered: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   item: {
     paddingTop: 16,
@@ -21,12 +21,12 @@ export default StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: '#cccccc'
   },
   header: {
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   subheader: {
-    paddingTop: 10,
-  },
-})
+    paddingTop: 10
+  }
+});

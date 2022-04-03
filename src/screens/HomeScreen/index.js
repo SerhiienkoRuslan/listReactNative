@@ -29,6 +29,9 @@ const ListItem = ({ post, onPress }) => {
 export default ({ navigation }) => {
   const { data, loading } = useQuery(POSTS_QUERY);
 
+  const handleOnPress = (item) =>
+    navigation.navigate(routesName.POST_SCREEN, { post: item });
+
   if (loading) {
     return <AppLoading />;
   }
@@ -37,12 +40,7 @@ export default ({ navigation }) => {
     <FlatList
       data={data?.getPosts || []}
       renderItem={({ item }) => (
-        <ListItem
-          post={item}
-          onPress={() =>
-            navigation.navigate(routesName.POST_SCREEN, { post: item })
-          }
-        />
+        <ListItem post={item} onPress={() => handleOnPress(item)} />
       )}
       keyExtractor={(post) => post.id.toString()}
     />
