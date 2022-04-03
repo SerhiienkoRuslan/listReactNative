@@ -1,4 +1,6 @@
 export default {
   HEIGHT_INPUTS: 50,
-  BORDER_RADIUS: 25
+  BORDER_RADIUS: 25,
+  AVATAR_SIZE: 40,
+  AVATAR_RADIUS: 3
 };

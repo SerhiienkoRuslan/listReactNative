@@ -1,21 +1,22 @@
 import { Platform, StyleSheet } from 'react-native';
 import colors from 'styles/colors';
-
-const { GREY } = colors;
+import uiElementSize from 'constants/uiElementSize';
 
 export default StyleSheet.create({
   wrap: {
     flexDirection: 'row',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     marginLeft: 8,
     marginRight: 0
   },
   slackAvatar: {
-    height: 40,
-    width: 40,
-    borderRadius: 3,
-    backgroundColor: GREY
+    width: uiElementSize.AVATAR_SIZE,
+    height: uiElementSize.AVATAR_SIZE,
+    borderRadius: uiElementSize.AVATAR_RADIUS,
+    marginTop: 2,
+    backgroundColor: colors.primary,
+    overflow: 'hidden'
   },
   slackAvatarContainer: {},
   emoji: {
@@ -27,7 +28,8 @@ export default StyleSheet.create({
   },
   slackMessageText: {
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
+    color: colors.textSecond
   },
   container: {
     flex: 1,
@@ -39,7 +41,8 @@ export default StyleSheet.create({
     justifyContent: 'flex-end'
   },
   username: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: colors.text
   },
   time: {
     textAlign: 'left',

@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import uiElementSize from 'constants/uiElementSize';
+import colors from 'styles/colors';
 
-const CustomButton = ({ onPress, text, ...rest }) => {
+const CustomButton = ({ onPress, text, customStyles, ...rest }) => {
   return (
     <TouchableOpacity
       {...rest}
-      style={styles.submit}
+      style={[styles.submitBtn, customStyles]}
       onPress={onPress}
     >
       <Text style={styles.text}>{text || ''}</Text>
@@ -16,17 +17,15 @@ const CustomButton = ({ onPress, text, ...rest }) => {
 };
 
 const styles = StyleSheet.create({
-  submit:{
-    width: "80%",
-    backgroundColor: "#fb5b5a",
+  submitBtn: {
+    height: uiElementSize.HEIGHT_INPUTS,
+    backgroundColor: colors.primary,
     borderRadius: uiElementSize.BORDER_RADIUS,
-    height: uiElementSize.HEIGHT,
-    alignItems:"center",
-    justifyContent:"center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  text:{
-    color:"white",
-    height: uiElementSize.HEIGHT
+  text: {
+    color: 'white'
   }
 });
 

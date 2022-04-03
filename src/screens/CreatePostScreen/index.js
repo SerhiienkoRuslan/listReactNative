@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { gql, useMutation } from '@apollo/client';
 
 import Input from 'components/Input';
@@ -23,43 +23,43 @@ const CreatePostScreen = ({ navigation }) => {
   });
 
   const onSubmit = () => {
-    submitLogin({ variables: { ...postData } })
-      .then(resp => {
-        if (resp?.data?.createPost) {
-          navigation.navigate('Post', { post: resp?.data?.createPost })
-        }
-      });
+    submitLogin({ variables: { ...postData } }).then((resp) => {
+      if (resp?.data?.createPost) {
+        navigation.navigate('Post', { post: resp?.data?.createPost });
+      }
+    });
   };
 
   return (
-    <View style={styles.center}>
-      <Text>CREATE POST</Text>
-
+    <View style={styles.wrap}>
       <Input
         placeholder="Title"
-        onChangeText={(title) => setPostData(prev => ({ ...prev, title }))}
+        onChangeText={(title) => setPostData((prev) => ({ ...prev, title }))}
       />
 
       <Input
         placeholder="Content"
-        onChangeText={(content) => setPostData(prev => ({ ...prev, content }))}
+        onChangeText={(content) =>
+          setPostData((prev) => ({ ...prev, content }))
+        }
       />
 
       <CustomButton
         onPress={onSubmit}
         text="Submit"
+        customStyles={{ width: '80%' }}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  center: {
+  wrap: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center"
-  },
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center'
+  }
 });
 
 export default CreatePostScreen;

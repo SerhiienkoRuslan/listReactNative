@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { gql, useMutation, useApolloClient } from '@apollo/client';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import Input from 'components/Input';
+import CustomButton from 'components/CustomButton';
 
 import graphqlVar from 'graphqlVar';
 
@@ -35,9 +36,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.center}>
-      <Text>Profile</Text>
-
+    <View style={styles.wrap}>
       <Input
         value={profileData?.name || ''}
         placeholder="User Name"
@@ -50,32 +49,21 @@ const ProfileScreen = () => {
         onChangeText={(email) => setProfile((prev) => ({ ...prev, email }))}
       />
 
-      <TouchableOpacity style={styles.submitBtn} onPress={onUpdateProfile}>
-        <Text style={styles.submitBtnText}>Submit</Text>
-      </TouchableOpacity>
+      <CustomButton
+        onPress={onUpdateProfile}
+        text="Submit"
+        customStyles={{ width: '80%' }}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  center: {
+  wrap: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center'
-  },
-  submitBtn: {
-    width: '80%',
-    backgroundColor: '#fb5b5a',
-    borderRadius: 25,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    marginBottom: 10
-  },
-  submitBtnText: {
-    color: 'white'
   }
 });
 

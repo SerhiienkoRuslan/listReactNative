@@ -7,17 +7,7 @@ import Navigation from './navigation/Navigation';
 import { GlobalProvider } from './context';
 import ApolloProvider from './ApolloProvider';
 
-const theme = {
-  dark: false,
-  colors: {
-    primary: 'rgb(255, 45, 85)',
-    background: 'rgb(242, 242, 242)',
-    card: 'rgb(255, 255, 255)',
-    text: 'rgb(28, 28, 30)',
-    border: 'rgb(199, 199, 204)',
-    notification: 'rgb(255, 69, 58)'
-  }
-};
+import theme from 'styles/theme';
 
 const Main = () => {
   return (

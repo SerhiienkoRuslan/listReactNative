@@ -1,15 +1,11 @@
 import React, { useRef } from 'react';
-import {
-  Animated,
-  StyleSheet,
-  Text,
-  View,
-  Alert,
-} from 'react-native';
-
+import { Animated, Text, View, Alert } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+import colors from 'styles/colors';
+
+import styles from './styles';
 
 const AppleStyleSwipeableRow = ({ children }) => {
   const swipeRef = useRef();
@@ -20,7 +16,7 @@ const AppleStyleSwipeableRow = ({ children }) => {
     const trans = dragX.interpolate({
       inputRange: [0, 50, 100, 101],
       outputRange: [-20, 0, 0, 1],
-      extrapolate: 'clamp',
+      extrapolate: 'clamp'
     });
 
     return (
@@ -29,9 +25,10 @@ const AppleStyleSwipeableRow = ({ children }) => {
           style={[
             styles.actionText,
             {
-              transform: [{ translateX: trans }],
-            },
-          ]}>
+              transform: [{ translateX: trans }]
+            }
+          ]}
+        >
           Archive
         </Animated.Text>
       </RectButton>
@@ -41,7 +38,7 @@ const AppleStyleSwipeableRow = ({ children }) => {
   const renderRightAction = (text, color, x, progress) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [x, 0],
+      outputRange: [x, 0]
     });
 
     const pressHandler = () => {
@@ -53,7 +50,8 @@ const AppleStyleSwipeableRow = ({ children }) => {
       <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
         <RectButton
           style={[styles.rightAction, { backgroundColor: color }]}
-          onPress={pressHandler}>
+          onPress={pressHandler}
+        >
           <Text style={styles.actionText}>{text}</Text>
         </RectButton>
       </Animated.View>
@@ -65,10 +63,11 @@ const AppleStyleSwipeableRow = ({ children }) => {
       style={{
         width: 192,
         flexDirection: 'row'
-      }}>
-      {renderRightAction('More', '#C8C7CD', 192, progress)}
-      {renderRightAction('Flag', '#ffab00', 128, progress)}
-      {renderRightAction('More', '#dd2c00', 64, progress)}
+      }}
+    >
+      {renderRightAction('More', colors.actionMore, 192, progress)}
+      {renderRightAction('Flag', colors.actionFlag, 128, progress)}
+      {renderRightAction('More', colors.actionDelete, 64, progress)}
     </View>
   );
 
@@ -80,29 +79,11 @@ const AppleStyleSwipeableRow = ({ children }) => {
       leftThreshold={30}
       rightThreshold={40}
       renderLeftActions={renderLeftActions}
-      renderRightActions={renderRightActions}>
+      renderRightActions={renderRightActions}
+    >
       {children || ''}
     </Swipeable>
   );
-}
-
-const styles = StyleSheet.create({
-  leftAction: {
-    flex: 1,
-    backgroundColor: '#497AFC',
-    justifyContent: 'center',
-  },
-  actionText: {
-    color: 'white',
-    fontSize: 16,
-    backgroundColor: 'transparent',
-    padding: 10,
-  },
-  rightAction: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  }
-});
+};
 
 export default AppleStyleSwipeableRow;
