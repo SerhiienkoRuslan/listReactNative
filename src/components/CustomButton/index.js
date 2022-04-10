@@ -11,7 +11,7 @@ const CustomButton = ({ onPress, text, customStyles, ...rest }) => {
       style={[styles.submitBtn, customStyles]}
       onPress={onPress}
     >
-      <Text style={styles.text}>{text || ''}</Text>
+      <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -28,5 +28,10 @@ const styles = StyleSheet.create({
     color: 'white'
   }
 });
+
+CustomButton.defaultProps = {
+  onPress: () => {},
+  text: ''
+};
 
 export default CustomButton;

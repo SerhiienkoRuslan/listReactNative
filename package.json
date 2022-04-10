@@ -6,7 +6,9 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest",
+    "cover": "jest --coverage"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
@@ -48,7 +50,12 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "babel-jest": "^27.5.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
+    "jest": "^27.5.1",
     "prettier": "2.5.1",
     "react-devtools": "^4.23.0"
   },

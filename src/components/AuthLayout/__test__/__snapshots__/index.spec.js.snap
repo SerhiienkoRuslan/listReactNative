@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthLayout component should render AuthLayout component with props 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#003f5c",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#fb5b5a",
+        "fontSize": 50,
+        "fontWeight": "bold",
+        "marginBottom": 40,
+      }
+    }
+  >
+    SoWhat?
+  </Text>
+  <ForwardRef>
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 11,
+        }
+      }
+    >
+      Forgot Password?
+    </Text>
+  </ForwardRef>
+  <CustomButton
+    customStyles={
+      Object {
+        "marginBottom": 10,
+        "marginTop": 10,
+        "width": "80%",
+      }
+    }
+    onPress={[MockFunction]}
+    text="Login"
+  />
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      Sign Up
+    </Text>
+  </ForwardRef>
+</View>
+`;
+
+exports[`AuthLayout component should render AuthLayout component without props 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#003f5c",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#fb5b5a",
+        "fontSize": 50,
+        "fontWeight": "bold",
+        "marginBottom": 40,
+      }
+    }
+  >
+    SoWhat?
+  </Text>
+  <CustomButton
+    customStyles={
+      Object {
+        "marginBottom": 10,
+        "marginTop": 10,
+        "width": "80%",
+      }
+    }
+    onPress={[MockFunction]}
+    text="Sign Up"
+  />
+  <ForwardRef
+    onPress={[Function]}
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      Login
+    </Text>
+  </ForwardRef>
+</View>
+`;

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomButton component should render CustomButton component with props 1`] = `
+<ForwardRef
+  onPress={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#fb5b5a",
+        "borderRadius": 25,
+        "height": 50,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  >
+    Delete
+  </Text>
+</ForwardRef>
+`;
+
+exports[`CustomButton component should render CustomButton component without props 1`] = `
+<ForwardRef
+  onPress={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#fb5b5a",
+        "borderRadius": 25,
+        "height": 50,
+        "justifyContent": "center",
+      },
+      undefined,
+    ]
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  />
+</ForwardRef>
+`;
