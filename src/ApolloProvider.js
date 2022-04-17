@@ -35,10 +35,10 @@ const wsLink = new WebSocketLink({
   uri: API_WS,
   options: {
     reconnect: true
+  },
+  connectionParams: {
+    authToken: authHelpers.getToken() || ''
   }
-  // connectionParams: {
-  //   authToken: authHelpers.getToken() || ''
-  // }
 });
 
 const errorLink = onError((dataErr) => errorHelpers(dataErr, cache));

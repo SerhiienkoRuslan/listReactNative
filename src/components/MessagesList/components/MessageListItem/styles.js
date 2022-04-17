@@ -38,7 +38,6 @@ export default StyleSheet.create({
   messageText: {
     color: colors.textSecond,
     backgroundColor: 'transparent',
-    whiteSpace: 'nowrap',
     width: '50%',
     overflow: 'hidden'
   },
